@@ -1,4 +1,4 @@
-FROM node:8.16s
+FROM node:8.16
 RUN yarn install && \
     yarn build
 
