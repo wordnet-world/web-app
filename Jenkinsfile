@@ -1,10 +1,12 @@
 pipeline {
   agent any
-  // def scmVars = checkout scm
   stages {
-    stage('Env outside') {
+    stage('Env inside') {
       steps {
-        sh "${GIT_COMMIT}"
+        docker.image('node:8.16') {
+          sh 'yarn install'
+          sh "echo ${GIT_COMMIT}"
+        }
       }
     }
   }
