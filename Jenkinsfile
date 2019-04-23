@@ -1,8 +1,10 @@
 node {
-    sh 'env'
+    stage('Env outside') {
+        sh 'env'
+    }
     /* Requires the Docker Pipeline plugin to be installed */
     docker.image('node:7-alpine').inside {
-        stage('Test') {
+        stage('Env inside') {
             sh 'env'
         }
     }
