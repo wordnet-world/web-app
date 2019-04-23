@@ -11,7 +11,8 @@ pipeline {
 
           }
           steps {
-            sh 'yarn install && yarn build'
+            sh '''yarn install && yarn build
+ls -la'''
           }
         }
         stage('Env') {
