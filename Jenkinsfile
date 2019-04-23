@@ -40,9 +40,9 @@ pipeline {
     stage('Docker Push') {
       agent {
         docker {
-          image 'docker:dind'
+          image 'docker:18.09'
           args '''--privileged
--v /root:$WORKSPACE'''
+-d docker:dind'''
         }
 
       }
