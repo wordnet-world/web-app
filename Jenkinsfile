@@ -7,6 +7,7 @@ pipeline {
           agent {
             docker {
               image 'node:8.16'
+              args '-v ~:$WORKSPACE'
             }
 
           }
@@ -26,8 +27,13 @@ pipeline {
       agent {
         docker {
           image 'docker:18.09'
+          args '''-v ~:$WORKSPACE
+--privileged'''
         }
 
+      }
+      environment {
+        GIT_COMMIT = '$GIT_COMMIT'
       }
       steps {
         sh 'docker build . -t cjblink1/wordnet-world-web-app:latest'
@@ -37,8 +43,13 @@ pipeline {
       agent {
         docker {
           image 'docker:18.09'
+          args '''-v ~:$WORKSPACE
+--privileged'''
         }
 
+      }
+      environment {
+        GIT_COMMIT = '$GIT_COMMIT'
       }
       steps {
         sh 'docker push cjblink1/wordnet-world-web-app:latest'
