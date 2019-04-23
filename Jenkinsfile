@@ -25,9 +25,8 @@ pipeline {
     stage('Docker Build') {
       agent {
         docker {
-          image 'docker:18.09'
-          args '''--privileged
--d docker:dind'''
+          image 'docker:dind'
+          args '--privileged'
         }
 
       }
@@ -41,9 +40,8 @@ pipeline {
     stage('Docker Push') {
       agent {
         docker {
-          image 'docker:18.09'
-          args '''--privileged
--d docker:dind'''
+          args '--privileged'
+          image 'docker:dind'
         }
 
       }
