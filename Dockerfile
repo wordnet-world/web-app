@@ -1,7 +1,3 @@
-FROM node:8.16
-RUN yarn install && \
-    yarn build
-
 FROM nginx:1.15
 
 COPY dist/web-app /usr/share/nginx/html
