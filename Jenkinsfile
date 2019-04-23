@@ -36,7 +36,8 @@ pipeline {
         GIT_COMMIT = '$GIT_COMMIT'
       }
       steps {
-        sh 'docker build . -t cjblink1/wordnet-world-web-app:latest'
+        sh '''ls -la
+docker build . -t cjblink1/wordnet-world-web-app:latest'''
       }
     }
     stage('Docker Push') {
