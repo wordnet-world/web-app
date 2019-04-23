@@ -26,8 +26,7 @@ pipeline {
       agent {
         docker {
           image 'docker:dind'
-          args '''--privileged
--v /root:$WORKSPACE'''
+          args '--privileged'
         }
 
       }
