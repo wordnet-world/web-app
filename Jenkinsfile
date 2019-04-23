@@ -2,14 +2,24 @@ pipeline {
   agent any
   stages {
     stage('Yarn Build') {
-      agent {
-        docker {
-          image 'node:8.16'
-        }
+      parallel {
+        stage('Yarn Build') {
+          agent {
+            docker {
+              image 'node:8.16'
+            }
 
-      }
-      steps {
-        sh 'yarn install && yarn build'
+          }
+          steps {
+            sh 'yarn install && yarn build'
+          }
+        }
+        stage('Env') {
+          agent any
+          steps {
+            sh 'env'
+          }
+        }
       }
     }
     stage('Docker Build') {
