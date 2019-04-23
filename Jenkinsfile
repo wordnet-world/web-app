@@ -1,14 +1,13 @@
 pipeline {
   agent any
   stages {
-    stage('Env inside') {
+    stage('Docker Build and Push') {
       steps {
         sh 'echo Hi'
         script {
-          docker.image('node:8.16').inside {
-            sh 'yarn install'
-            sh "echo ${GIT_COMMIT}"
-          }
+          def webAppImage = docker.build("cjblink1/wordnet-world-web-app:${GIT_COMMIT}")
+          webAppImage.push()
+
         }
 
       }
