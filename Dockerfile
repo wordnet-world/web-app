@@ -1,4 +1,5 @@
 FROM node:8.16
+WORKDIR /root
 RUN ls && \
     yarn install && \
     yarn build
