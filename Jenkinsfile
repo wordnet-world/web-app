@@ -1,19 +1,14 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:8.16'
-    }
-
-  }
+  agent none
   stages {
-    stage('Install') {
+    stage('Docker Build') {
       steps {
-        sh 'yarn install'
+        sh 'docker build . -t cjblink1/wordnet-world-web-app:$GIT_COMMIT'
       }
     }
-    stage('Build') {
+    stage('Docker Push') {
       steps {
-        sh 'yarn build'
+        sh 'docker push cjblink1/wordnet-world-web-app:latest'
       }
     }
   }
