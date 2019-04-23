@@ -1,4 +1,4 @@
 node {
   checkout scm
-  def customImage = docker.build("my-image:${env.GIT_COMMIT}")
+  def customImage = docker.build("cjblink1/wordnet-world-web-app:${env.GIT_COMMIT}")
 }
