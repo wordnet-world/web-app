@@ -26,7 +26,8 @@ pipeline {
       agent {
         docker {
           image 'docker:18.09'
-          args '--privileged'
+          args '''--privileged
+-d docker:dind'''
         }
 
       }
@@ -41,7 +42,8 @@ pipeline {
       agent {
         docker {
           image 'docker:18.09'
-          args '--privileged'
+          args '''--privileged
+-d docker:dind'''
         }
 
       }
