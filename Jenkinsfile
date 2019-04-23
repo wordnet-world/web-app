@@ -7,7 +7,7 @@ pipeline {
           agent {
             docker {
               image 'node:8.16'
-              args '-v ~:$WORKSPACE'
+              args '-v /root:$WORKSPACE'
             }
 
           }
@@ -27,7 +27,7 @@ pipeline {
       agent {
         docker {
           image 'docker:18.09'
-          args '''-v ~:$WORKSPACE
+          args '''-v /root:$WORKSPACE
 --privileged'''
         }
 
@@ -43,7 +43,7 @@ pipeline {
       agent {
         docker {
           image 'docker:18.09'
-          args '''-v ~:$WORKSPACE
+          args '''-v /root:$WORKSPACE
 --privileged'''
         }
 
