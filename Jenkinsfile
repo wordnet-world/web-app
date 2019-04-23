@@ -27,7 +27,8 @@ pipeline {
         docker {
           image 'docker:dind'
           args '''--privileged
--v /var/run/docker.sock:/var/run/docker.sock'''
+-v /var/run/docker.sock:/var/run/docker.sock
+-u root'''
         }
 
       }
