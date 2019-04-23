@@ -4,8 +4,10 @@ pipeline {
     stage('Update Kubernetes Config') {
       steps {
         git 'git@github.com:wordnet-world/config.git'
-        docker.image('bitnami/kubectl:1.14.1').inside {
-          sh 'ls'
+        script {
+          docker.image('bitnami/kubectl:1.14.1').inside {
+            sh 'ls'
+          }
         }
       }
     }
