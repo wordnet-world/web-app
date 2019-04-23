@@ -13,13 +13,23 @@ pipeline {
       }
     }
     stage('Docker Build') {
-      agent any
+      agent {
+        docker {
+          image 'docker:18.09'
+        }
+
+      }
       steps {
         sh 'docker build . -t cjblink1/wordnet-world-web-app:latest'
       }
     }
     stage('Docker Push') {
-      agent any
+      agent {
+        docker {
+          image 'docker:18.09'
+        }
+
+      }
       steps {
         sh 'docker push cjblink1/wordnet-world-web-app:latest'
       }
