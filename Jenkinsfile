@@ -3,9 +3,11 @@ pipeline {
   stages {
     stage('Env inside') {
       steps {
-        docker.image('node:8.16') {
-          sh 'yarn install'
-          sh "echo ${GIT_COMMIT}"
+        script {
+          docker.image('node:8.16') {
+            sh 'yarn install'
+            sh "echo ${GIT_COMMIT}"
+          }
         }
       }
     }
