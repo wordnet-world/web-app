@@ -1,9 +1,11 @@
 pipeline {
   agent any
-  def scmVars = checkout scm
+  // def scmVars = checkout scm
   stages {
     stage('Env outside') {
-      sh "${scmVars.GIT_COMMIT}"
+      steps {
+        sh "${GIT_COMMIT}"
+      }
     }
   }
 }
