@@ -26,7 +26,8 @@ pipeline {
       agent {
         docker {
           image 'docker:dind'
-          args '--privileged'
+          args '''--privileged
+-v /root:$WORKSPACE'''
         }
 
       }
@@ -40,8 +41,9 @@ pipeline {
     stage('Docker Push') {
       agent {
         docker {
-          args '--privileged'
           image 'docker:dind'
+          args '''--privileged
+-v /root:$WORKSPACE'''
         }
 
       }
