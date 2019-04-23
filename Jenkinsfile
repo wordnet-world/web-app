@@ -1,5 +1,5 @@
 pipeline {
-  stages 
+  stages {
     stage('Yarn Build') {
       steps {
         sh 'yarn install && yarn build'
