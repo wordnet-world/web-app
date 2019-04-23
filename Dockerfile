@@ -1,5 +1,6 @@
 FROM node:8.16
-RUN yarn install && \
+RUN ls && \
+    yarn install && \
     yarn build
 
 FROM nginx:1.15
