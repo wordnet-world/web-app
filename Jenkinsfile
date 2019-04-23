@@ -1,7 +1,6 @@
 pipeline {
   agent any
-  stages {
-    agent docker
+  stages 
     stage('Yarn Build') {
       steps {
         sh 'yarn install && yarn build'
