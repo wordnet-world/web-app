@@ -1,5 +1,6 @@
 FROM node:8.16
-WORKDIR /root
+COPY . /root/web-app
+WORKDIR /root/web-app
 RUN ls && \
     yarn install && \
     yarn build
