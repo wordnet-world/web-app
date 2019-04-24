@@ -13,7 +13,7 @@ pipeline {
       steps {
         git 'git@github.com:wordnet-world/config.git'
         script {
-          docker.image('busybox:1.30').inside('-v $HOME:/root') {
+          docker.image('bitnami/kubectl:1.14.1').inside('-v $HOME:/root --entrypoint=/bin/bash') {
             sh 'echo version'
           }
         }
