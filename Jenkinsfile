@@ -13,7 +13,9 @@ pipeline {
       steps {
         git 'git@github.com:wordnet-world/config.git'
         script {
-          docker.image('bitnami/kubectl:1.14.1').withRun('-v $HOME/root', 'version') {}
+          docker.image('bitnami/kubectl:1.14.1').withRun('-v $HOME:/root') {
+            sh 'version'
+          }
         }
       }
     }
