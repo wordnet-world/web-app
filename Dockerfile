@@ -3,7 +3,7 @@ COPY . /root/web-app
 WORKDIR /root/web-app
 RUN ls && \
     yarn install && \
-    yarn build -prod --base-href /app --deploy-url /app
+    yarn build --prod --base-href /app --deploy-url /app
 
 FROM nginx:1.15
 COPY --from=0 /root/web-app/dist/web-app /usr/share/nginx/html
