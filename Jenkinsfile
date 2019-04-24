@@ -18,7 +18,7 @@ pipeline {
           }
         }
         sh 'git add manifests/wordnet-world-web-app-deployment.yaml'
-        sh "git commit -m \"Updated web app deployment to ${GIT_COMMIT}\""
+        sh "git commit -m 'Updated web app deployment to ${GIT_COMMIT}'"
         sh 'git push'
       }
     }
