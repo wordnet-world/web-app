@@ -17,8 +17,8 @@ pipeline {
             sh "kubectl set image -f manifests/wordnet-world-web-app-deployment.yaml --local wordnet-world-web-app=cjblink1/wordnet-world-web-app:${GIT_COMMIT} -o yaml"
           }
         }
-        sh 'git add manifests/wordnet-world-web-app.yaml'
-        sh "git commit -m \"Updated web app to version ${GIT_COMMIT}\""
+        sh 'git add manifests/wordnet-world-web-app-deployment.yaml'
+        sh "git commit -m \"Updated web app deployment to ${GIT_COMMIT}\""
         sh 'git push'
       }
     }
