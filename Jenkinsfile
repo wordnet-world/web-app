@@ -13,8 +13,8 @@ pipeline {
       steps {
         git 'git@github.com:wordnet-world/config.git'
         script {
-          docker.image('bitnami/kubectl:1.14.1').inside {
-            sh 'version'
+          docker.image('bitnami/kubectl:1.14.1').inside('-it --entrypoint bash') {
+            sh 'echo Hi'
           }
         }
       }
