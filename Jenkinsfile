@@ -13,9 +13,8 @@ pipeline {
       steps {
         git 'git@github.com:wordnet-world/config.git'
         script {
-          docker.image('bitnami/kubectl:1.14.1').inside('-itd') {
-            sh 'version'
-          }
+          def kubectlContainer = docker.image('bitnami/kubectl:1.14.1').run('-v $HOME/root', 'version')
+          kubectl.stop();
         }
       }
     }
