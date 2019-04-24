@@ -14,7 +14,7 @@ pipeline {
         git 'git@github.com:wordnet-world/config.git'
         script {
           docker.image('bitnami/kubectl:1.14.1').inside('--entrypoint=\'\'') {
-            sh "kubectl set image -f manifests/wordnet-world-web-app.yaml --local=true --dry-run cjblink1/wordnet-world-web-app:${GIT_COMMIT}"
+            sh "kubectl set image --filename manifests/wordnet-world-web-app.yaml --local=true --dry-run cjblink1/wordnet-world-web-app:${GIT_COMMIT}"
           }
         }
         sh 'git add manifests/wordnet-world-web-app.yaml'
