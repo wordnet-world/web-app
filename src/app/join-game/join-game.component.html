@@ -1,3 +1,10 @@
-<p>
-  join-game works!
-</p>
+<mat-card>
+  <mat-card-title>
+    Join Game
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <app-game-list-entry *ngFor="let i of [1, 2, 3, 4]"></app-game-list-entry>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
