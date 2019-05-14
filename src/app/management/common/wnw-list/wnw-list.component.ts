@@ -9,7 +9,9 @@ export class WnwListComponent implements OnInit {
 
   @Input() title: string;
   @Input() buttonText: string;
+  @Input() backVisible: boolean = false;
   @Output() buttonClick: EventEmitter<any> = new EventEmitter();
+  @Output() backClick: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -18,6 +20,10 @@ export class WnwListComponent implements OnInit {
 
   handleClick(e) {
     this.buttonClick.emit(e);
+  }
+
+  handleBack(e) {
+    this.backClick.emit(e);
   }
 
 

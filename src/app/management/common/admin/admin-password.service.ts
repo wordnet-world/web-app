@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 class AdminPasswordCheckResponse {
   data: string;
@@ -24,12 +24,12 @@ export class AdminPasswordService {
 
   checkAdminPassword(): Promise<boolean> {
     return new Promise<boolean>((resolve => {
-      if (this.adminPassword == undefined) {
+      if (this.adminPassword === undefined) {
         resolve(false);
       }
       this.http.get<AdminPasswordCheckResponse>('/api/adminPasswordCheck', {
         headers: new HttpHeaders({
-          'AdminPassword': this.adminPassword,
+          AdminPassword: this.adminPassword,
           'Content-Type': 'application/json'
         })
       }).subscribe(response => {

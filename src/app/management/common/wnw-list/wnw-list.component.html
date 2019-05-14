@@ -3,6 +3,9 @@
     <mat-card-title>
       <span>{{ title }}</span>
       <span class="fill-remaining-space"></span>
+      <button *ngIf="backVisible" mat-icon-button (click)="handleBack($event)">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       <button mat-raised-button (click)="handleClick($event)" >{{ buttonText }}</button>
     </mat-card-title>
     <mat-card-content>

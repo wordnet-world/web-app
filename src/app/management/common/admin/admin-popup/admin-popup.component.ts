@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from "@angular/material";
-import {AdminPasswordService} from "../admin-password.service";
-import {Router} from "@angular/router";
+import {MatDialogRef} from '@angular/material';
+import {AdminPasswordService} from '../admin-password.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-popup',
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AdminPopupComponent implements OnInit {
 
-  passwordInput: string = '';
+  passwordInput = '';
 
   constructor(private dialogRef: MatDialogRef<AdminPopupComponent>,
               private adminPasswordService: AdminPasswordService,

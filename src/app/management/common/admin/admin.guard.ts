@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import {AdminPasswordService} from "./admin-password.service";
-import {MatDialog} from "@angular/material";
-import {AdminPopupComponent} from "./admin-popup/admin-popup.component";
+import {AdminPasswordService} from './admin-password.service';
+import {MatDialog} from '@angular/material';
+import {AdminPopupComponent} from './admin-popup/admin-popup.component';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -24,5 +24,5 @@ export class AdminGuard implements CanActivate {
         });
     });
   }
-  
+
 }

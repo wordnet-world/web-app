@@ -2,29 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ManagementRoutingModule } from './management-routing.module';
-import {JoinComponent} from "./join/join.component";
+import {JoinComponent} from './join/join.component';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDialog,
   MatDialogModule,
-  MatDialogRef, MatInputModule,
+  MatDialogRef, MatIconModule, MatInputModule,
   MatListModule
-} from "@angular/material";
+} from '@angular/material';
 import { WnwListComponent } from './common/wnw-list/wnw-list.component';
-import { CreateComponent } from './create/create.component';
 import { AdminPopupComponent } from './common/admin/admin-popup/admin-popup.component';
-import {AdminGuard} from "./common/admin/admin.guard";
-import {AdminPasswordService} from "./common/admin/admin-password.service";
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import { AdminGuard } from './common/admin/admin.guard';
+import { AdminPasswordService } from './common/admin/admin-password.service';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   declarations: [
     JoinComponent,
     WnwListComponent,
-    CreateComponent,
-    AdminPopupComponent
+    AdminPopupComponent,
+    ManageComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +33,7 @@ import {FormsModule} from "@angular/forms";
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
+    MatIconModule,
     HttpClientModule,
     FormsModule
   ],
