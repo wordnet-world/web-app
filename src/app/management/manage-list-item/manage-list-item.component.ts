@@ -10,6 +10,7 @@ import {DeleteGameService} from "../delete-game/delete-game.service";
 export class ManageListItemComponent implements OnInit {
 
   @Input() game: Game;
+  @Input() isLast: boolean;
   confirm: boolean = false;
   @Output() delete: EventEmitter<any> = new EventEmitter();
 

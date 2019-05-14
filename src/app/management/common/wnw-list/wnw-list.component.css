@@ -43,3 +43,9 @@ mat-card-content {
   border-top-style: solid;
   border-top-width: 1px;
 }
+
+:host ::ng-deep .last {
+  border-bottom-color: #505050;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}

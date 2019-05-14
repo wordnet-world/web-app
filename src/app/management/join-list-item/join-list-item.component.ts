@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class JoinListItemComponent implements OnInit {
 
   @Input() game: Game;
+  @Input() isLast: boolean;
 
   constructor(private router: Router) { }
 

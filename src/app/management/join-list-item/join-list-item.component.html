@@ -1,1 +1,1 @@
-<mat-list-item (click)="handleJoinGame()">{{ game.name }}</mat-list-item>
+<mat-list-item (click)="handleJoinGame()" [ngClass]="{ last: isLast }">{{ game.name }}</mat-list-item>
