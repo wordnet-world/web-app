@@ -1,9 +1,9 @@
-#noGamesListItem {
+#noGames {
   border-top-style: none;
   border-top-width: 0;
 }
 
-#noGames {
+#noGames * {
   width: 100%;
   text-align: center;
 }
