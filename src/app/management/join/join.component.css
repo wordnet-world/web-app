@@ -1,15 +1,15 @@
 
-#list {
-  border-color: #505050;
-  border-style: solid;
-  border-width: 1px;
-  overflow: auto;
-  flex: 1 0 auto;
-  height: 0;
-}
+/*#list {*/
+/*  border-color: #505050;*/
+/*  border-style: solid;*/
+/*  border-width: 1px;*/
+/*  overflow: auto;*/
+/*  flex: 1 0 auto;*/
+/*  height: 0;*/
+/*}*/
 
-mat-list-item {
-  border-top-color: #505050;
-  border-top-style: solid;
-  border-top-width: 1px;
-}
+/*mat-list-item {*/
+/*  border-top-color: #505050;*/
+/*  border-top-style: solid;*/
+/*  border-top-width: 1px;*/
+/*}*/

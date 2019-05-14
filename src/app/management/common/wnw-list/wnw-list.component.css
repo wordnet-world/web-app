@@ -27,3 +27,18 @@ mat-card-content {
   flex-direction: column;
   flex: 1;
 }
+
+:host ::ng-deep #list {
+  border-color: #505050;
+  border-style: solid;
+  border-width: 1px;
+  overflow: auto;
+  flex: 1;
+  height: 0;
+}
+
+:host ::ng-deep mat-list-item {
+  border-top-color: #505050;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
