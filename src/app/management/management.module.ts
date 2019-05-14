@@ -22,6 +22,7 @@ import {ListGamesService} from "./common/list-games/list-games.service";
 import {CreateGameService} from "./create-game/create-game.service";
 import { ManageListItemComponent } from './manage-list-item/manage-list-item.component';
 import {DeleteGameService} from "./delete-game/delete-game.service";
+import { JoinListItemComponent } from './join-list-item/join-list-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {DeleteGameService} from "./delete-game/delete-game.service";
     AdminPopupComponent,
     ManageComponent,
     CreateGameComponent,
-    ManageListItemComponent
+    ManageListItemComponent,
+    JoinListItemComponent
   ],
   imports: [
     CommonModule,
