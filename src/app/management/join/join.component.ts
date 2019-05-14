@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {Game} from "../common/game/game";
 
 @Component({
   selector: 'app-join',
@@ -8,9 +9,12 @@ import {Router} from '@angular/router';
 })
 export class JoinComponent implements OnInit {
 
+  games: Game[];
+
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.games = [];
   }
 
   handleAdminClick() {

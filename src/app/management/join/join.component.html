@@ -1,5 +1,10 @@
 <wnw-list title="Join Game" buttonText="Admin" (buttonClick)="handleAdminClick()">
   <mat-action-list id="list">
+    <mat-list-item *ngIf="games.length < 1" id="noGames">
+      <span class="fill-remaining-space"></span>
+      <span class="fill-remaining-space">No games!</span>
+      <span class="fill-remaining-space"></span>
+    </mat-list-item>
     <mat-list-item>Foo</mat-list-item>
     <mat-list-item>Bar</mat-list-item>
     <mat-list-item>Baz</mat-list-item>

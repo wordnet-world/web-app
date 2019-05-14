@@ -24,8 +24,9 @@ export class AdminPasswordService {
 
   checkAdminPassword(): Promise<boolean> {
     return new Promise<boolean>((resolve => {
-      if (this.adminPassword === undefined) {
+      if (this.adminPassword == undefined) {
         resolve(false);
+        return;
       }
       this.http.get<AdminPasswordCheckResponse>('/api/adminPasswordCheck', {
         headers: new HttpHeaders({
