@@ -19,6 +19,8 @@ export class JoinComponent implements OnInit {
     this.listGamesService.listGames()
       .then(games => {
         this.games = games;
+      }).catch(() => {
+        this.games = [];
       });
   }
 

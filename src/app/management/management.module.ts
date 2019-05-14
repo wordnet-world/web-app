@@ -20,6 +20,8 @@ import { ManageComponent } from './manage/manage.component';
 import { CreateGameComponent } from './create-game/create-game.component';
 import {ListGamesService} from "./common/list-games/list-games.service";
 import {CreateGameService} from "./create-game/create-game.service";
+import { ManageListItemComponent } from './manage-list-item/manage-list-item.component';
+import {DeleteGameService} from "./delete-game/delete-game.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {CreateGameService} from "./create-game/create-game.service";
     WnwListComponent,
     AdminPopupComponent,
     ManageComponent,
-    CreateGameComponent
+    CreateGameComponent,
+    ManageListItemComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,8 @@ import {CreateGameService} from "./create-game/create-game.service";
     AdminGuard,
     AdminPasswordService,
     ListGamesService,
-    CreateGameService
+    CreateGameService,
+    DeleteGameService
   ],
   bootstrap: [JoinComponent]
 })

@@ -1,0 +1,10 @@
+<mat-list-item>
+  <span>{{ game.name }}</span>
+  <span class="fill-remaining-space"></span>
+  <button *ngIf="!confirm" mat-icon-button color="warn" (click)="handleConfirm()">
+    <mat-icon>remove_circle</mat-icon>
+  </button>
+  <button *ngIf="confirm" mat-raised-button color="warn" (click)="handleDelete()">
+    Corfirm Delete?
+  </button>
+</mat-list-item>
