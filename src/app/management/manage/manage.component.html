@@ -1,4 +1,4 @@
-<wnw-list title="Manage Games" buttonText="New Game" backVisible="true" (backClick)="handleBack()">
+<wnw-list title="Manage Games" buttonText="New Game" backVisible="true" (backClick)="handleBack()" (buttonClick)="handleNewGame()">
   <mat-action-list id="list" disableRipple="true">
     <mat-list-item *ngIf="games.length < 1" id="noGamesListItem">
       <span id="noGames">No games!</span>

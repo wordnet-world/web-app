@@ -17,13 +17,17 @@ import { AdminPasswordService } from './common/admin/admin-password.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { ManageComponent } from './manage/manage.component';
+import { CreateGameComponent } from './create-game/create-game.component';
+import {ListGamesService} from "./common/list-games/list-games.service";
+import {CreateGameService} from "./create-game/create-game.service";
 
 @NgModule({
   declarations: [
     JoinComponent,
     WnwListComponent,
     AdminPopupComponent,
-    ManageComponent
+    ManageComponent,
+    CreateGameComponent
   ],
   imports: [
     CommonModule,
@@ -38,12 +42,15 @@ import { ManageComponent } from './manage/manage.component';
     FormsModule
   ],
   entryComponents: [
-    AdminPopupComponent
+    AdminPopupComponent,
+    CreateGameComponent
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},
     AdminGuard,
-    AdminPasswordService
+    AdminPasswordService,
+    ListGamesService,
+    CreateGameService
   ],
   bootstrap: [JoinComponent]
 })

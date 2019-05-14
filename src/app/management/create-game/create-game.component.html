@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>New Game</h1>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="name" required maxlength="30">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Time Limit (seconds)" [(ngModel)]="timeLimit" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="handleNewGame()">OK</button>
+</mat-dialog-actions>

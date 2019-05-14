@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Game} from "../common/game/game";
+import {ListGamesService} from "../common/list-games/list-games.service";
 
 @Component({
   selector: 'app-join',
@@ -9,12 +10,16 @@ import {Game} from "../common/game/game";
 })
 export class JoinComponent implements OnInit {
 
-  games: Game[];
+  games: Game[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private listGamesService: ListGamesService) { }
 
   ngOnInit() {
-    this.games = [];
+    this.listGamesService.listGames()
+      .then(games => {
+        this.games = games;
+      });
   }
 
   handleAdminClick() {
