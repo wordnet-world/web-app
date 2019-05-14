@@ -1,6 +1,9 @@
-#noGames {
+#noGamesListItem {
   border-top-style: none;
   border-top-width: 0;
-  display: flex;
-  flex-direction: row;
+}
+
+#noGames {
+  width: 100%;
+  text-align: center;
 }

@@ -1,6 +1,9 @@
 <wnw-list title="Manage Games" buttonText="New Game" backVisible="true" (backClick)="handleBack()">
   <mat-action-list id="list" disableRipple="true">
-    <mat-list-item>
+    <mat-list-item id="noGamesListItem">
+      <span id="noGames">No games!</span>
+    </mat-list-item>
+    <mat-list-item *ngFor="let game of games">
       <span>Foo</span>
       <span class="fill-remaining-space"></span>
       <button mat-icon-button>
