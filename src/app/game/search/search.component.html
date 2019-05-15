@@ -1,5 +1,10 @@
 <div>
-  <p>
-    Search Works!
-  </p>
+  <form (ngSubmit)="handleSubmit($event)" >
+    <mat-form-field>
+      <input #searchBox matInput placeholder="Guess">
+    </mat-form-field>
+    <button mat-icon-button>
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </form>
 </div>
