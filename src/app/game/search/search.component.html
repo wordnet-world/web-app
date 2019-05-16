@@ -1,7 +1,7 @@
 <div>
-  <form (ngSubmit)="handleSubmit($event)" >
+  <form (ngSubmit)="handleSubmit()" >
     <mat-form-field>
-      <input #searchBox matInput placeholder="Guess">
+      <input [(ngModel)]="search" matInput placeholder="Guess" name="search">
     </mat-form-field>
     <button mat-icon-button>
       <mat-icon>arrow_forward</mat-icon>

@@ -62,7 +62,6 @@ export class GraphComponent implements OnInit {
       .force('center', d3.forceCenter(width / 2, height / 2));
 
     this.g = this.svg.append('g').attr('class', 'everything');
-    console.log(this.g.attr('transform'));
 
     const link = this.g.append('g')
       .attr('class', 'links')
@@ -113,6 +112,14 @@ export class GraphComponent implements OnInit {
         .on('drag', dragged)
         .on('end', dragended));
 
+    const label = this.g.append('g')
+      .attr('class', 'nodes')
+      .selectAll('circle')
+      .data(this.graph.nodes)
+      .enter().append('text')
+      .text(function (d: any) {return d.id})
+      .attr('text-anchor', 'middle');
+
     // Zoom functions
     const zoom_actions = () => {
       this.g.attr('transform', d3.event.transform);
@@ -148,6 +155,10 @@ export class GraphComponent implements OnInit {
       node
         .attr('cx', function (d: any) { return d.x; })
         .attr('cy', function (d: any) { return d.y; });
+
+      label
+        .attr('x', function (d: any) { return d.x })
+        .attr('y', function (d: any) { return d.y });
     }
   }
 

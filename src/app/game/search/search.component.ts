@@ -8,19 +8,19 @@ import {MatInput} from "@angular/material";
 })
 export class SearchComponent implements OnInit {
 
-  @ViewChild("searchBox") searchBox: ElementRef;
+  search: string;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.searchBox);
-    this.searchBox.nativeElement.focus();
 
   }
 
-  handleSubmit(e) {
-    console.log(e);
+  handleSubmit() {
+    this.search = '';
   }
+
+
 
 
 }
