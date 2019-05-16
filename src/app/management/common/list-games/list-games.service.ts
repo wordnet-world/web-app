@@ -17,7 +17,7 @@ export class ListGamesService {
     return new Promise<Game[]>((resolve, reject) => {
       this.http.get<ListGamesResponse>('/api/listGames', {
         params: new HttpParams()
-          .set('fields', 'gameID,name')
+          .set('fields', 'gameID,name,teams')
       }).subscribe(response => {
           if (! response.success) {
             reject(response.error);

@@ -7,6 +7,7 @@ import { GraphComponent } from './graph/graph.component';
 import { SearchComponent } from './search/search.component';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from "@angular/material";
 import {FormsModule} from "@angular/forms";
+import {GameService} from "./game/game.service";
 
 @NgModule({
   declarations: [GameComponent, GraphComponent, SearchComponent],
@@ -18,6 +19,9 @@ import {FormsModule} from "@angular/forms";
     MatButtonModule,
     MatIconModule,
     FormsModule
+  ],
+  providers: [
+    GameService
   ]
 })
 export class GameModule { }
