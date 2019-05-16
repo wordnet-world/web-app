@@ -18,7 +18,7 @@ export class JoinListItemComponent implements OnInit {
   }
 
   handleJoinGame() {
-    this.router.navigate(['/game'])
+    this.router.navigate(['/game', this.game.gameID])
   }
 
 }
