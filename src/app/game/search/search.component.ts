@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatInput} from "@angular/material";
 import {GameService} from "../game/game.service";
 
 @Component({

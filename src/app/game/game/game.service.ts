@@ -25,7 +25,7 @@ export class GameService {
 
 
   handleJoinGame(teamID: string) {
-    this.socket = new WebSocket(`ws://localhost/api/joinGame?teamID=${teamID}`);
+    this.socket = new WebSocket(`ws://${window.location.host}/api/joinGame?teamID=${teamID}`);
     this.socket.addEventListener('message', event => this.messageSubject.next(JSON.parse(event.data)));
   }
 
