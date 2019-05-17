@@ -1,6 +1,11 @@
 <mat-list-item [ngClass]="{ last: isLast }">
   <span>{{ game.name }}</span>
   <span class="fill-remaining-space"></span>
+  <button mat-raised-button (click)="handleStartGame()" [disabled]="startDisabled">
+    <span *ngIf="this.game.status === 'waiting'">Start Game</span>
+    <span *ngIf="this.game.status === 'in-progress'">In Progress</span>
+    <span *ngIf="this.game.status === 'complete'">Complete</span>
+  </button>
   <button *ngIf="!confirm" mat-icon-button color="warn" (click)="handleConfirm()">
     <mat-icon>remove_circle</mat-icon>
   </button>

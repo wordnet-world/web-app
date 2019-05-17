@@ -1,1 +1,8 @@
-<mat-list-item (click)="handleJoinGame()" [ngClass]="{ last: isLast }">{{ game.name }}</mat-list-item>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    {{ game.name }}
+  </mat-expansion-panel-header>
+  <mat-action-list>
+    <mat-list-item *ngFor="let team of game.teams; let last = last" [ngClass]="{ last: last }" (click)="handleJoinGame(team)" >{{ team.name }}</mat-list-item>
+  </mat-action-list>
+</mat-expansion-panel>

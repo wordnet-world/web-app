@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {Game} from "../common/game/game";
 import {Router} from "@angular/router";
 
@@ -17,8 +17,21 @@ export class JoinListItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleJoinGame() {
-    this.router.navigate(['/game', this.game.teams[0].teamID])
+  handleJoinGame(team: any) {
+    this.router.navigate(['/game', team.teamID])
   }
 
 }
+
+@Pipe({
+  name: 'complete',
+  pure: false
+})
+export class CompletedPipe implements PipeTransform {
+
+  transform(games: Game[]): any {
+    return games.filter(game => game.status !== 'complete');
+  }
+
+}
+

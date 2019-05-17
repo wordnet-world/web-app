@@ -7,7 +7,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
-  MatDialogRef, MatIconModule, MatInputModule,
+  MatDialogRef, MatExpansionModule, MatIconModule, MatInputModule,
   MatListModule
 } from '@angular/material';
 import { WnwListComponent } from './common/wnw-list/wnw-list.component';
@@ -22,7 +22,8 @@ import {ListGamesService} from "./common/list-games/list-games.service";
 import {CreateGameService} from "./create-game/create-game.service";
 import { ManageListItemComponent } from './manage-list-item/manage-list-item.component';
 import {DeleteGameService} from "./delete-game/delete-game.service";
-import { JoinListItemComponent } from './join-list-item/join-list-item.component';
+import {CompletedPipe, JoinListItemComponent} from './join-list-item/join-list-item.component';
+import {StartGameService} from "./start-game/start-game.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { JoinListItemComponent } from './join-list-item/join-list-item.component
     ManageComponent,
     CreateGameComponent,
     ManageListItemComponent,
-    JoinListItemComponent
+    JoinListItemComponent,
+    CompletedPipe
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { JoinListItemComponent } from './join-list-item/join-list-item.component
     MatDialogModule,
     MatInputModule,
     MatIconModule,
+    MatExpansionModule,
     HttpClientModule,
     FormsModule
   ],
@@ -56,7 +59,8 @@ import { JoinListItemComponent } from './join-list-item/join-list-item.component
     AdminPasswordService,
     ListGamesService,
     CreateGameService,
-    DeleteGameService
+    DeleteGameService,
+    StartGameService
   ],
   bootstrap: [JoinComponent]
 })

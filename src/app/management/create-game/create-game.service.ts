@@ -19,9 +19,9 @@ export class CreateGameService {
              teams: string[]): Promise<any> {
     return new Promise<any>(((resolve, reject) => {
       this.http.post<CreateGameResponse>('/api/createGame', {name: name, timeLimit: timeLimit, teams: teams},
-        { headers: new HttpHeaders({
-          'AdminPassword': this.adminPasswordService.getAdminPassword()
-        })})
+        { headers: new HttpHeaders()
+            .set('AdminPassword', this.adminPasswordService.getAdminPassword())
+        })
         .subscribe(response => {
           if(response.success) {
             resolve(response.data);
