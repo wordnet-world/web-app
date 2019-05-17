@@ -72,6 +72,9 @@ export class GameService {
 
 
   handleJoinGame(teamID: string) {
+    this.graph = new Graph();
+    this.graph.nodes = new Map<number, Node>();
+    this.graph.edges = new Map<string, Edge>();
     this.socket = new WebSocket(`ws://${window.location.host}/api/joinGame?teamID=${teamID}`);
     this.socket.addEventListener('message', event => this.messageSubject.next(JSON.parse(event.data)));
   }

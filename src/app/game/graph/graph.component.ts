@@ -146,7 +146,7 @@ export class GraphComponent implements OnInit {
       .enter().append('circle')
       .attr('r', 30)
       .attr('fill',  (d: any) => {return this.color(1);})
-      .on('click', clicked)
+      // .on('click', clicked)
       .call(d3.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
