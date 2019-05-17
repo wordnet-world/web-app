@@ -24,17 +24,18 @@ export class EndMessage {
 export class Node {
   nodeID: number;
   text: string;
-
+  x: number;
+  y: number;
 }
 
 export class Edge {
-  aID: number;
-  bID: number;
+  source: Node;
+  target: Node;
 }
 
 export class Graph {
-  nodes: Node[];
-  edges: Edge[];
+  nodes: Map<number, Node>;
+  edges: Set<Edge>;
 }
 
 @Injectable()
@@ -48,9 +49,10 @@ export class GameService {
 
 
   constructor() {
-    this.graph.nodes = [];
-    this.graph.edges = [];
-    this.messageResponders.set('start', this.handleStartMessage);
+    this.graph = new Graph();
+    this.graph.nodes = new Map<number, Node>();
+    this.graph.edges = new Set<Edge>();
+    this.messageResponders.set('start', (message) => this.handleStartMessage(message));
     this.messageResponders.set('update', console.log);
     this.messageResponders.set('end', console.log);
     this.messageSubject.subscribe(message => {
@@ -75,12 +77,9 @@ export class GameService {
   }
 
   handleStartMessage(message: StartMessage) {
-    const rootNode: Node = this.createRootNode(message);
-    const connectedNodes: Node[] = this.createRootConnectedNodes(message);
-    const rootEdges: Edge[] = this.createRootEdges(message);
-    this.graph.nodes.push(rootNode);
-    this.graph.nodes.concat(connectedNodes);
-    this.graph.edges.concat(rootEdges);
+    this.createRootNode(message);
+    this.createRootConnectedNodes(message);
+    this.createRootEdges(this.graph.nodes.get(message.rootID), message);
     this.graphSubject.next(this.graph);
   }
 
@@ -88,29 +87,27 @@ export class GameService {
     const root: Node = new Node();
     root.nodeID = message.rootID;
     root.text = message.rootText;
-    return root;
+    root.x = 0, root.y = 0;
+    this.graph.nodes.set(root.nodeID, root);
   }
 
   createRootConnectedNodes(message: StartMessage) {
-    const nodes: Node[] = [];
     message.rootNeighbors.forEach(neighborID => {
       const neighbor: Node = new Node();
       neighbor.nodeID = neighborID;
       neighbor.text = null;
-      nodes.push(neighbor);
+      neighbor.x = 0, neighbor.y = 0;
+      this.graph.nodes.set(neighborID, neighbor);
     });
-    return nodes;
   }
 
-  createRootEdges(message: StartMessage) {
-    const edges: Edge[] = [];
+  createRootEdges(rootNode: Node, message: StartMessage) {
     message.rootNeighbors.forEach(neighborID => {
       const edge: Edge = new Edge();
-      edge.aID = message.rootID;
-      edge.bID = neighborID;
-      edges.push(edge);
+      edge.source = rootNode;
+      edge.target = this.graph.nodes.get(neighborID);
+      this.graph.edges.add(edge);
     });
-    return edges;
   }
 
 

@@ -21,7 +21,7 @@ export class GraphComponent implements OnInit {
   private color;
 
   constructor(private gameService: GameService) {
-    this.gameService.graphSubject.subscribe(this.handleGraphUpdate);
+    this.gameService.graphSubject.subscribe((graph) => this.handleGraphUpdate(graph));
   }
 
   ngOnInit() {
@@ -60,7 +60,7 @@ export class GraphComponent implements OnInit {
 
     zoom_handler(this.svg);
 
-    this.restart({ "nodes": [], "edges": []});
+    this.restart({ "nodes": new Map(), "edges": new Set()});
   }
 
   handle(event) {
@@ -71,12 +71,7 @@ export class GraphComponent implements OnInit {
     }
   }
 
-  handleGraphUpdate(graph: Graph) {
-    this.restart(graph);
-  }
-
   restart(graph: Graph) {
-
     const dragstarted = (d) => {
       if (!d3.event.active) {
         this.simulation.alphaTarget(.3).restart();
@@ -108,17 +103,17 @@ export class GraphComponent implements OnInit {
     this.link = this.g.append('g')
       .attr('class', 'links')
       .selectAll('line')
-      .data(graph.edges)
+      .data(Array.from(graph.edges.values()))
       .enter().append('line')
       .attr('stroke-width', 5);
 
     this.node = this.g.append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
-      .data(graph.nodes)
+      .data(Array.from(graph.nodes.values()))
       .enter().append('circle')
       .attr('r', 30)
-      .attr('fill',  (d: any) => { return this.color(d.group); })
+      .attr('fill',  (d: any) => {return this.color(1);})
       .on('click', clicked)
       .call(d3.drag()
         .on('start', dragstarted)
@@ -128,10 +123,11 @@ export class GraphComponent implements OnInit {
     this.label = this.g.append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
-      .data(graph.nodes)
+      .data(Array.from(graph.nodes.values()))
       .enter().append('text')
-      .text(function (d: any) {return d.id})
-      .attr('text-anchor', 'middle');
+      .text(function (d: any) {return d.text})
+      .attr('text-anchor', 'middle')
+      .attr('fill', 'white');
 
     const ticked = () => {
       this.link
@@ -150,10 +146,14 @@ export class GraphComponent implements OnInit {
     };
 
     this.simulation
-      .nodes(graph.nodes)
+      .nodes(Array.from(graph.nodes.values()))
       .on('tick', ticked);
 
     this.simulation.force('link')
-      .links(graph.edges);
+      .links(Array.from(graph.edges.values()));
+  }
+
+  handleGraphUpdate(graph: Graph) {
+    this.restart(graph);
   }
 }
