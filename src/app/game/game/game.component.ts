@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {GameService, Message} from "./game.service";
+import {GameService, UpdateMessage} from "./game.service";
 
 @Component({
   selector: 'app-game',
@@ -17,7 +17,7 @@ export class GameComponent implements OnInit {
     this.gameService.handleJoinGame(teamID);
   }
 
-  handleMessage(message: Message) {
+  handleMessage(message: UpdateMessage) {
     console.log(message)
   }
 
