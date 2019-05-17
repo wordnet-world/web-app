@@ -5,9 +5,9 @@ export class UpdateMessage {
   type: string;
   guess: string;
   correct: boolean;
-  newNodeId: number;
+  newNodeID: number;
   newNodeText: string;
-  newNodeNeightbors: number[];
+  newNodeNeighbors: number[];
 }
 
 export class StartMessage {
@@ -26,16 +26,20 @@ export class Node {
   text: string;
   x: number;
   y: number;
+  index: number;
+  vx: number;
+  vy: number;
 }
 
 export class Edge {
   source: Node;
   target: Node;
+  index: number;
 }
 
 export class Graph {
   nodes: Map<number, Node>;
-  edges: Set<Edge>;
+  edges: Map<string, Edge>;
 }
 
 @Injectable()
@@ -51,9 +55,9 @@ export class GameService {
   constructor() {
     this.graph = new Graph();
     this.graph.nodes = new Map<number, Node>();
-    this.graph.edges = new Set<Edge>();
+    this.graph.edges = new Map<string, Edge>();
     this.messageResponders.set('start', (message) => this.handleStartMessage(message));
-    this.messageResponders.set('update', console.log);
+    this.messageResponders.set('update', (message) => this.handleUpdateMessage(message));
     this.messageResponders.set('end', console.log);
     this.messageSubject.subscribe(message => {
       const type = message.type;
@@ -106,9 +110,53 @@ export class GameService {
       const edge: Edge = new Edge();
       edge.source = rootNode;
       edge.target = this.graph.nodes.get(neighborID);
-      this.graph.edges.add(edge);
+      this.graph.edges.set(`${edge.source.nodeID}.${edge.target.nodeID}`, edge);
     });
   }
+
+  handleUpdateMessage(message: UpdateMessage) {
+    if (!message.correct) return;
+    this.addTextToExistingNode(message);
+    this.mergeNewNeighborNodes(message);
+    this.mergeNewEdges(message);
+    this.graphSubject.next(this.graph);
+  }
+
+  addTextToExistingNode(message: UpdateMessage) {
+    const existingNode: Node = this.graph.nodes.get(message.newNodeID);
+    if (!existingNode) {
+      console.log(`Node ${message.newNodeID} does not exist!`);
+      return;
+    }
+    existingNode.text = message.newNodeText;
+    this.graph.nodes.set(message.newNodeID, existingNode);
+  }
+
+  mergeNewNeighborNodes(message: UpdateMessage) {
+    message.newNodeNeighbors.forEach(neighborID => {
+      if(this.graph.nodes.get(neighborID)) {
+        return;
+      }
+      const neighbor: Node = new Node();
+      neighbor.nodeID = neighborID;
+      neighbor.text = null;
+      neighbor.x = 0; neighbor.y = 0;
+      this.graph.nodes.set(neighborID, neighbor);
+    });
+  }
+
+  mergeNewEdges(message: UpdateMessage) {
+    message.newNodeNeighbors.forEach(neighborID => {
+      if(this.graph.edges.get(`${message.newNodeID}.${neighborID}`)) {
+        return;
+      }
+      const edge: Edge = new Edge();
+      edge.source = this.graph.nodes.get(message.newNodeID);
+      edge.target = this.graph.nodes.get(neighborID);
+      this.graph.edges.set(`${message.newNodeID}.${neighborID}`, edge);
+    });
+  }
+
 
 
 }

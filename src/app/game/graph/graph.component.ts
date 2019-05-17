@@ -35,17 +35,49 @@ export class GraphComponent implements OnInit {
     const manyBodyForce = d3.forceManyBody();
     manyBodyForce.strength(-800);
 
-    const linkForce = d3.forceLink().id(function (d: any) { return d.id; });
+    const linkForce = d3.forceLink([]);//.id(function (d: any) { return d; });
     linkForce.distance(200);
+
+    const ticked = () => {
+      // this.link.attr('x1', /4);
+      this.link
+        .attr('foo', 'true')
+        .attr('x1', function (d: any) { return d.source.x; })
+        .attr('y1', function (d: any) { return d.source.y; })
+        .attr('x2', function (d: any) { return d.target.x; })
+        .attr('y2', function (d: any) { return d.target.y; });
+
+
+      this.node
+        .attr('cx', function (d: any) { return d.x; })
+        .attr('cy', function (d: any) { return d.y; });
+
+      this.label
+        .text(d => { return d.text;})
+        .attr('x', function (d: any) { return d.x })
+        .attr('y', function (d: any) { return d.y });
+    };
 
     this.simulation = d3.forceSimulation()
       .force('collision', d3.forceCollide(40))
       .force('link', linkForce)
       .force('charge', manyBodyForce)
-      .force('center', d3.forceCenter(width / 2, height / 2));
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .on("tick", ticked);
 
     this.g = this.svg.append('g').attr('class', 'everything');
 
+    this.link = this.g.append('g')
+      .attr('class', 'links')
+      .selectAll('line');
+
+    this.node = this.g.append('g')
+      .attr('class', 'nodes')
+      .selectAll('circle');
+
+    this.label = this.g.append('g')
+      .attr('class', 'labels')
+      .selectAll('text');
 
     // Zoom functions
     const zoom_actions = () => {
@@ -60,7 +92,7 @@ export class GraphComponent implements OnInit {
 
     zoom_handler(this.svg);
 
-    this.restart({ "nodes": new Map(), "edges": new Set()});
+    this.restart({ "nodes": new Map(), "edges": new Map()});
   }
 
   handle(event) {
@@ -100,17 +132,17 @@ export class GraphComponent implements OnInit {
       d3.select(this.currentSelected).attr('class', 'selected');
     };
 
-    this.link = this.g.append('g')
-      .attr('class', 'links')
-      .selectAll('line')
-      .data(Array.from(graph.edges.values()))
-      .enter().append('line')
-      .attr('stroke-width', 5);
 
-    this.node = this.g.append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(Array.from(graph.nodes.values()))
+    this.link = this.link.data(Array.from(graph.edges.values()), (d: any) => {return d.source.nodeID + "-" + d.target.nodeID;});
+    this.link.exit().remove();
+    this.link = this.link
+      .enter().append('line')
+      .attr('stroke-width', 5)
+      .merge(this.link);
+
+    this.node = this.node.data(Array.from(graph.nodes.values()), (d: any) => {return d.nodeID});
+    this.node.exit().remove();
+    this.node = this.node
       .enter().append('circle')
       .attr('r', 30)
       .attr('fill',  (d: any) => {return this.color(1);})
@@ -118,39 +150,32 @@ export class GraphComponent implements OnInit {
       .call(d3.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
-        .on('end', dragended));
+        .on('end', dragended)).merge(this.node);
+      // .exit().remove();
 
-    this.label = this.g.append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(Array.from(graph.nodes.values()))
+    this.label = this.label.data(Array.from(graph.nodes.values()), (d: any) => { return d.nodeID; });
+    this.label.exit().remove();
+    this.label = this.label
       .enter().append('text')
       .text(function (d: any) {return d.text})
       .attr('text-anchor', 'middle')
-      .attr('fill', 'white');
+      .attr('fill', 'white')
+      .merge(this.label);
+      // .exit().remove();
 
-    const ticked = () => {
-      this.link
-        .attr('x1', function (d: any) { return d.source.x; })
-        .attr('y1', function (d: any) { return d.source.y; })
-        .attr('x2', function (d: any) { return d.target.x; })
-        .attr('y2', function (d: any) { return d.target.y; });
+    this.simulation.nodes(Array.from(graph.nodes.values()));
+    this.simulation.force('link').links(Array.from(graph.edges.values()));
+    this.simulation.alpha(1).restart();
 
-      this.node
-        .attr('cx', function (d: any) { return d.x; })
-        .attr('cy', function (d: any) { return d.y; });
 
-      this.label
-        .attr('x', function (d: any) { return d.x })
-        .attr('y', function (d: any) { return d.y });
-    };
-
-    this.simulation
-      .nodes(Array.from(graph.nodes.values()))
-      .on('tick', ticked);
-
-    this.simulation.force('link')
-      .links(Array.from(graph.edges.values()));
+    // this.simulation
+    //   .nodes()
+    //   .on('tick', ticked);
+    //
+    // this.simulation.force('link')
+    //   .links();
+    //
+    // this.simulation.sta
   }
 
   handleGraphUpdate(graph: Graph) {
